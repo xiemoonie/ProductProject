@@ -46,7 +46,7 @@ function listPage() {
       getFurniture(arr[i].sku, element)
     }
   }
-  req.open('GET', '../php/action/getdata.php')
+  req.open('GET', '../php/action/getData.php')
   req.send()
 }
 
@@ -78,7 +78,7 @@ function getBook(sku, ele) {
       }
     }
   }
-  rq.open('GET', '../php/action/getdata.php')
+  rq.open('GET', '../php/action/getData.php')
   rq.send()
 }
 
@@ -95,6 +95,6 @@ function getFurniture(sku, ele) {
       }
     }
   }
-  rq.open('GET', '../php/action/getdata.php')
+  rq.open('GET', '../php/action/getData.php')
   rq.send()
 }

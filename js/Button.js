@@ -24,7 +24,7 @@ function deleteI(sku) {
     type: 'POST',
     dataType: 'json',
     data: dataJson,
-    url: '../php/action/deletedata.php',
+    url: '../php/action/deleteData.php',
     success: function (resultText) {},
   }).fail(function () {
     console.log('Request failed:')
