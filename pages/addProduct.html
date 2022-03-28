@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styleAddProduct.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <h4>Product List</h4>
+      <button name="submit" class="buttonSave" onclick="sendDataToServer()">
+        Save
+      </button>
+      <button
+        onclick="clickCancel()"
+        id="cancel-product-btn"
+        class="buttonCancel"
+      >
+        Cancel
+      </button>
+      <hr class="solid" />
+
+      <form id="product_form">
+        <label>SKU</label>
+        <input type="text" id="sku" name="sku" placeholder="JVC200123" />
+        <label>Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Acme DISC"
+          onclick="pureLetter(document.getElementById('price').value)"
+        />
+        <label>Price($)</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          min="1"
+          step="any"
+          placeholder="1.00"
+        />
+
+        <label class="productType">Type Switcher</label>
+        <select name="prodTYPE" id="productType" onchange="changeFunc()">
+          <option value="DVD">DVD</option>
+          <option value="Furniture">Furniture</option>
+          <option value="Book">Book</option>
+        </select>
+        <div class="dform" id="form00">
+          <label>Size (MB)</label>
+          <input
+            onclick="clickDVD()"
+            name="size"
+            id="size"
+            value=""
+            type="number"
+            min="0"
+            max="100"
+          />
+        </div>
+
+        <div class="dform" id="form01" style="display: none;">
+          <label>Height(CM)</label>
+          <input
+            onclick="clickFurniture()"
+            name="height"
+            id="height"
+            type="number"
+            value=""
+            min="1"
+            step="any"
+            placeholder="1.00"
+          />
+          <label>Length(CM)</label>
+          <input
+            name="length"
+            id="length"
+            type="number"
+            value=""
+            min="1"
+            step="any"
+            placeholder="1.00"
+          />
+          <label>Width(CM)</label>
+          <input
+            name="width"
+            id="width"
+            type="number"
+            value=""
+            min="1"
+            step="any"
+            placeholder="1.00"
+          />
+        </div>
+        <div class="dform" id="form02" style="display: none;">
+          <label>Weight (KG)</label>
+          <input
+            onclick="clickBook()"
+            name="weight"
+            id="weight"
+            type="number"
+            value=""
+            min="1"
+            step="any"
+            placeholder="1.00"
+          />
+        </div>
+      </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/AppProduct.js"></script>
+  </body>
+</html>
