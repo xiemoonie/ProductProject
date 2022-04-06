@@ -10,7 +10,7 @@
   <body>
     <div class="container">
       <h4>Product List</h4>
-      <button name="submit" class="buttonSave" onclick="sendDataToServer()">
+      <button name="submit" class="buttonSave" onclick="sendDataToServer();">
         Save
       </button>
       <button
@@ -25,14 +25,15 @@
       <form id="product_form">
         <label>SKU</label>
         <input type="text" id="sku" name="sku" placeholder="JVC200123" />
+        <p class = "elem" id = "skuElem"></p>
         <label>Name</label>
         <input
           type="text"
           id="name"
           name="name"
           placeholder="Acme DISC"
-          onclick="pureLetter(document.getElementById('price').value)"
         />
+        <p class = "elem" id = "nameElem"></p>
         <label>Price($)</label>
         <input
           type="number"
@@ -42,7 +43,8 @@
           step="any"
           placeholder="1.00"
         />
-
+        <p class = "elem" id = "priceElem">OK</p>
+      </form>
         <label class="productType">Type Switcher</label>
         <select name="prodTYPE" id="productType" onchange="changeFunc()">
           <option value="DVD">DVD</option>
@@ -60,8 +62,9 @@
             min="0"
             max="100"
           />
+          <p class = "elem" id = "sizeElem"></p>
         </div>
-
+     
         <div class="dform" id="form01" style="display: none;">
           <label>Height(CM)</label>
           <input
@@ -74,6 +77,7 @@
             step="any"
             placeholder="1.00"
           />
+          <p class = "elem" id = "heightElem"></p>
           <label>Length(CM)</label>
           <input
             name="length"
@@ -84,6 +88,7 @@
             step="any"
             placeholder="1.00"
           />
+          <p class = "elem" id = "lengthElem"></p>
           <label>Width(CM)</label>
           <input
             name="width"
@@ -94,6 +99,7 @@
             step="any"
             placeholder="1.00"
           />
+          <p class = "elem" id = "widthElem"></p>
         </div>
         <div class="dform" id="form02" style="display: none;">
           <label>Weight (KG)</label>
@@ -107,11 +113,13 @@
             step="any"
             placeholder="1.00"
           />
+          <p class = "elem" id = "weightElem"></p>
         </div>
-      </form>
+
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="../js/appProduct.js"></script>
+    <script type="text/javascript" src="../js/button.js"></script>
   </body>
 </html>
