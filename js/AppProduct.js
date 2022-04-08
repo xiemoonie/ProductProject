@@ -6,15 +6,17 @@ function clickCancel() {
 
 function pureLetter(elem, errorMessage) {
   var errorElem = $(elem + 'Elem')
-  var form2 = $('#form00')
-  var form1 = $('#product_form')
   var txt = $(elem).val()
   var letters = /^[A-Za-z0-9., ]+$/
-  if (txt.match(letters)) {
+
+  if(txt.length === 0){
+    errorElem.text('Please, submit required data')
+    dataAreOk = false
+  }else if (txt.match(letters)) {
     errorElem.text('')
     return txt
   } else {
-    errorElem.text(errorMessage)
+    errorElem.text('Please, provide the data of indicated type')
     dataAreOk = false
   }
 }
@@ -49,19 +51,19 @@ function sendDataToServer() {
 
   var data = {
     itemType: selectedType,
-    sku: pureLetter('#sku', 'please submit require data'),
-    name: pureLetter('#name', 'please submit require data'),
-    price: pureLetter('#price', 'please submit require data'),
+    sku: pureLetter('#sku'),
+    name: pureLetter('#name'),
+    price: pureLetter('#price'),
     ...(selectedType == 'DVD' && {
-      size: pureLetter('#size', 'please provide the right size'),
+      size: pureLetter('#size'),
     }),
     ...(selectedType == 'Furniture' && {
-      height: pureLetter('#height', 'please provide the right dimensions'),
-      length: pureLetter('#length', 'please provide the right dimensions'),
-      width: pureLetter('#width', 'please provide the right dimensions'),
+      height: pureLetter('#height'),
+      length: pureLetter('#length'),
+      width: pureLetter('#width'),
     }),
     ...(selectedType == 'Book' && {
-      weight: pureLetter('#weight', 'please provide the right weight'),
+      weight: pureLetter('#weight',  'please submit require data'),
     }),
   }
 
@@ -78,10 +80,10 @@ function sendDataToServer() {
           setD: dataJson,
         },
         url: '../php/actions/addItem.php',
-      },
-      function (respuesta) {
-        returnMainPage()
-      },
+        success: function (respuesta) {
+          returnMainPage()
+        }
+      }
     )
   }
 }

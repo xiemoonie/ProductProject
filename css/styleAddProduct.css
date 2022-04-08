@@ -29,6 +29,13 @@ button {
   display: grid;
   grid-template-columns: repeat(3, 100px);
 }
+.userMessage{
+  grid-column-start: 1; 
+  grid-column-end: 4;
+}
+.elem{
+  color: red;
+}
 label {
   margin-top: 11px;
   margin-bottom: 11px;
