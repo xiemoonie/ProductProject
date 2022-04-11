@@ -26,7 +26,9 @@ class ItemController
     }
     function getData()
     {
-        $enlace = connection();
+        $en = new DB();
+        $enlace = $en->connection();
+
 
         $sql = 'SELECT sku, itemType FROM item';
 
