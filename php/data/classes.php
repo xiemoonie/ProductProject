@@ -1,28 +1,47 @@
 <?php
-
-include("../db/connect.php");
-
 abstract class Item
 {
     public $sku;
     public $name;
     public $price;
+    public $itemType;
 
     function __construct($jsonData)
     {
-        $this->sku = $jsonData->sku;
-        $this->name = $jsonData->name;
-        $this->price = $jsonData->price;
+        if (isset($jsonData)) {
+            $this->sku = $jsonData->sku;
+            $this->name = $jsonData->name;
+            $this->price = $jsonData->price;
+            $this->itemType = $jsonData->itemType;
+        }
+    }
+
+    function loadFromDb($sku) {
+        $enlace = connection();
+
+        $sql = "SELECT sku, nam, price, itemType FROM item WHERE sku='$sku'";
+
+        $result = $enlace->query($sql);
+
+        $row = $result->fetch_assoc();
+
+        $this->sku = $row["sku"];
+        $this->name = $row["nam"];
+        $this->price = $row["price"];
+        $this->itemType = $row["itemType"];
+
+        $this->loadExtraFromDb($enlace);
+        
+        mysqli_close($enlace);
     }
 
     function addToDb()
     {
-
         $enlace = connection();
 
-        $sql = "INSERT INTO item(SKU, NAM, PRICE)
+        $sql = "INSERT INTO item(SKU, NAM, PRICE, ITEMTYPE)
                 VALUES
-                ('$this->sku', '$this->name',' $this->price')";
+                ('$this->sku', '$this->name', '$this->price', '$this->itemType')";
 
         $generalSql = mysqli_query($enlace, $sql);
 
@@ -35,7 +54,20 @@ abstract class Item
         mysqli_close($enlace);
     }
 
+    function deleteFromDb() 
+    {
+        $enlace = connection();
+        $this->deleteExtraFromDb($enlace);
+
+        $sql = "DELETE FROM item WHERE sku='$this->sku'";
+        mysqli_query($enlace, $sql);
+        
+        mysqli_close($enlace);
+    }
+
     abstract protected function addExtraToDb($enlace);
+    abstract protected function deleteExtraFromDb($enlace);
+    abstract protected function loadExtraFromDb($enlace);
 }
 
 class DVD extends Item
@@ -44,7 +76,9 @@ class DVD extends Item
     function __construct($jsonData)
     {
         parent::__construct($jsonData);
-        $this->size = $jsonData->size;
+        if (isset($jsonData)) {
+            $this->size = $jsonData->size;
+        }
     }
     function get_size()
     {
@@ -68,6 +102,24 @@ class DVD extends Item
             echo "Error dvd";
         }
     }
+
+    function loadExtraFromDb($enlace) 
+    {
+        $sql = "SELECT sku, size FROM dvd WHERE sku='$this->sku'";
+
+        $result = $enlace->query($sql);
+
+        $row = $result->fetch_assoc();
+
+        $this->size = $row["size"];
+    }
+
+    function deleteExtraFromDb($enlace) 
+    {
+        $sql = "DELETE FROM dvd WHERE sku='$this->sku'";
+
+        $result = $enlace->query($sql);
+    }
 }
 
 class Book extends Item
@@ -76,7 +128,9 @@ class Book extends Item
     function __construct($jsonData)
     {
         parent::__construct($jsonData);
-        $this->weight = $jsonData->weight;
+        if (isset($jsonData)) {
+            $this->weight = $jsonData->weight;
+        }
     }
     function addExtraToDb($enlace)
     {
@@ -88,6 +142,23 @@ class Book extends Item
             echo "Error book";
         }
     }
+    function loadExtraFromDb($enlace) 
+    {
+        $sql = "SELECT sku, weight FROM book WHERE sku='$this->sku'";
+
+        $result = $enlace->query($sql);
+
+        $row = $result->fetch_assoc();
+
+        $this->weight = $row["weight"];
+    }
+    
+    function deleteExtraFromDb($enlace) 
+    {
+        $sql = "DELETE FROM book WHERE sku='$this->sku'";
+
+        $result = $enlace->query($sql);
+    }
 }
 class Furniture extends Item
 {
@@ -97,11 +168,13 @@ class Furniture extends Item
     function __construct($jsonData)
     {
         parent::__construct($jsonData);
-
-        $this->width = $jsonData->width;
-        $this->height = $jsonData->height;
-        $this->lenght = $jsonData->length;
+        if (isset($jsonData)) {
+            $this->width = $jsonData->width;
+            $this->height = $jsonData->height;
+            $this->lenght = $jsonData->length;
+        }
     }
+
     function addExtraToDb($enlace)
     {
         $sql = "INSERT INTO furniture(SKU, HEIGHT, WIDTH, LENG)
@@ -111,5 +184,25 @@ class Furniture extends Item
         if (!mysqli_query($enlace, $sql)) {
             echo "Error furniture";
         }
+    }
+
+    function loadExtraFromDb($enlace) 
+    {
+        $sql = "SELECT sku, height, width, leng FROM furniture WHERE sku='$this->sku'";
+
+        $result = $enlace->query($sql);
+
+        $row = $result->fetch_assoc();
+
+        $this->width = $row["width"];
+        $this->height = $row["height"];
+        $this->lenght = $row["leng"];
+    }
+    
+    function deleteExtraFromDb($enlace) 
+    {
+        $sql = "DELETE FROM furniture WHERE sku='$this->sku'";
+
+        $result = $enlace->query($sql);
     }
 }

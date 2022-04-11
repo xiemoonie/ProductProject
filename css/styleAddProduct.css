@@ -21,13 +21,20 @@ button {
   margin-left: 80%;
   margin-right: 10px;
 }
-form {
+#product_form{
   display: grid;
-  grid-template-columns: repeat(2, 100px);
+  grid-template-columns: repeat(3, 100px);
 }
 .dform {
   display: grid;
-  grid-template-columns: repeat(2, 100px);
+  grid-template-columns: repeat(3, 100px);
+}
+.userMessage{
+  grid-column-start: 1; 
+  grid-column-end: 4;
+}
+.elem{
+  color: red;
 }
 label {
   margin-top: 11px;
