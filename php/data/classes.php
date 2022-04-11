@@ -17,7 +17,8 @@ abstract class Item
     }
 
     function loadFromDb($sku) {
-        $enlace = connection();
+        $en = new DB();
+        $enlace = $en->connection();
 
         $sql = "SELECT sku, nam, price, itemType FROM item WHERE sku='$sku'";
 
@@ -37,7 +38,8 @@ abstract class Item
 
     function addToDb()
     {
-        $enlace = connection();
+        $en = new DB();
+        $enlace = $en->connection();
 
         $sql = "INSERT INTO item(SKU, NAM, PRICE, ITEMTYPE)
                 VALUES
@@ -56,7 +58,8 @@ abstract class Item
 
     function deleteFromDb() 
     {
-        $enlace = connection();
+        $en = new DB();
+        $enlace = $en->connection();
         $this->deleteExtraFromDb($enlace);
 
         $sql = "DELETE FROM item WHERE sku='$this->sku'";
