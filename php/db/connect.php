@@ -20,7 +20,7 @@ class DB {
         } else {
             error_log('not created. Error');
         }
-        $enlace->select_db('mibd');
+        $enlace->select_db('midb');
     }
     
     function prepareTables($en)
