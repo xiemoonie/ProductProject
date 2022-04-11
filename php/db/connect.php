@@ -14,7 +14,7 @@ class DB {
     
     function createDB($enlace)
     {
-        $sql = 'create database if not exists mibd';
+        $sql = 'create database if not exists midb';
         if ($enlace->query($sql) === true) {
             error_log('created');
         } else {
