@@ -38,13 +38,13 @@ class ItemController
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $className = $row["itemType"];
-                $ob = new $className();
+                $ob = new $className(NULL);
                 $ob->loadFromDb($row["sku"]);
                 $results[] = $ob;
             }
         }
 
-        $obj = new stdClass();
+        $obj = new stdClass(NULL); 
         $obj->items = $results;
 
         $objToSend = json_encode($obj);

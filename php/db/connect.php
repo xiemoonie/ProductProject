@@ -1,8 +1,9 @@
 <?php
-class DB {
+
+  class DB {
     function connection()
     {
-        $enlace = mysqli_connect('127.0.0.1', 'root', 'lubosito');
+       $enlace = mysqli_connect('localhost','id18577008_localhost','_b_P_IY13WH_d0_E');
         if ($enlace->connect_error) {
             die('Connection failed: ' . $enlace->connect_error);
         } else {
@@ -14,19 +15,19 @@ class DB {
     
     function createDB($enlace)
     {
-        $sql = 'create database if not exists midb';
+        $sql = 'create database if not exists id18577008_lubosito';
         if ($enlace->query($sql) === true) {
             error_log('created');
         } else {
             error_log('not created. Error');
         }
-        $enlace->select_db('midb');
+        $enlace->select_db('id18577008_lubosito');
     }
     
     function prepareTables($en)
     {
         $sql =
-            'create table if not exists Item(sku varchar(30) primary key, nam varchar(30), price varchar(30), itemType varchar(30))';
+            'create table if not exists item(sku varchar(30) primary key, nam varchar(30), price varchar(30), itemType varchar(30))';
     
         if ($en->query($sql) === true) {
             error_log ('successful0');
@@ -35,7 +36,7 @@ class DB {
         }
     
         $sql =
-            'create table if not exists book(weight varchar(30), sku varchar(30), foreign key (sku) references Item(sku))';
+            'create table if not exists book(weight varchar(30), sku varchar(30), foreign key (sku) references item(sku))';
     
         if ($en->query($sql) === true) {
             error_log ('successful1');
@@ -44,7 +45,7 @@ class DB {
         }
     
         $sql =
-            'create table if not exists dvd(size int, sku varchar(30), foreign key (sku) references Item(sku))';
+            'create table if not exists dvd(size int, sku varchar(30), foreign key (sku) references item(sku))';
     
         if ($en->query($sql) === true) {
             error_log ('successful2');
@@ -53,7 +54,7 @@ class DB {
         }
     
         $sql =
-            'create table if not exists furniture(height varchar(30), leng varchar(30), width varchar(30), sku varchar(30), foreign key (sku) references Item(sku))';
+            'create table if not exists furniture(height varchar(30), leng varchar(30), width varchar(30), sku varchar(30), foreign key (sku) references item(sku))';
     
         if ($en->query($sql) === true) {
             error_log ('successful3');
@@ -64,4 +65,5 @@ class DB {
     
     
 }
+  
 ?>

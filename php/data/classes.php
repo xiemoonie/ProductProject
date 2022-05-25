@@ -41,14 +41,15 @@ abstract class Item
         $en = new DB();
         $enlace = $en->connection();
 
-        $sql = "INSERT INTO item(SKU, NAM, PRICE, ITEMTYPE)
+        $sql = "INSERT INTO item(sku, nam, price, itemType)
                 VALUES
                 ('$this->sku', '$this->name', '$this->price', '$this->itemType')";
 
         $generalSql = mysqli_query($enlace, $sql);
 
         if (!$generalSql) {
-            die("Cannot add");
+            die("Cannot add. ".$enlace->error);
+            
         }
 
         $this->addExtraToDb($enlace);
@@ -97,12 +98,12 @@ class DVD extends Item
     }
     function addExtraToDb($enlace)
     {
-        $sql = "INSERT INTO dvd(SKU, SIZE)
+        $sql = "INSERT INTO dvd(sku, size)
                 VALUES
                 ('$this->sku', '$this->size')";
 
         if (!mysqli_query($enlace, $sql)) {
-            echo "Error dvd";
+            echo "Error dvd".$enlace->error;
         }
     }
 
@@ -137,7 +138,7 @@ class Book extends Item
     }
     function addExtraToDb($enlace)
     {
-        $sql = "INSERT INTO book(SKU, WEIGHT)
+        $sql = "INSERT INTO book(sku, weight)
                 VALUES
                 ('$this->sku', '$this->weight')";
 
@@ -180,7 +181,7 @@ class Furniture extends Item
 
     function addExtraToDb($enlace)
     {
-        $sql = "INSERT INTO furniture(SKU, HEIGHT, WIDTH, LENG)
+        $sql = "INSERT INTO furniture(sku, height, width, leng)
                 VALUES
                 ('$this->sku', '$this->height','$this->width','$this->lenght')";
 

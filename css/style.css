@@ -1,15 +1,24 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
 .item-list {
   display: grid;
   grid-template-columns: repeat(4, 250px);
   justify-content: center;
 }
 .item {
-  border: 1px solid rgb(141, 139, 139);
+  border: 1px solid rgb(189, 189, 196);
   width: 200px;
   height: 200px;
   text-align: center;
   list-style-type: none;
   margin-bottom: 25px;
+  border-radius: 10px; 
+}
+.item:hover {
+  border: 3px solid rgb(240, 240, 240);
+  box-shadow: 5px 5px 10px rgb(196, 195, 195);
+  width: 210px;
+  height: 210px;
 }
 .delete-checkbox {
   margin-top: 10px;
@@ -28,20 +37,29 @@ h2 {
   display: inline-block;
   padding: 5px 5px;
   margin: 5px 5px;
-  font-family: cursive;
+  font-family: Lato; 
 }
 button {
+  font-family: Lato; 
   border-style: solid;
-  box-shadow: 2px 2px 1px black;
-  border-color: rgb(0, 0, 0);
+  box-shadow: 2px 2px 1px rgb(207, 207, 207);
+  padding: 8px 10px;
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  border-color: rgb(218, 213, 213);
   border-width: 1px;
   background-color: white;
+  border-radius: 10px; 
 }
 .buttonAdd {
   margin-left: 70%;
   margin-right: 10px;
 }
 
+
 .info {
+  font-family: Lato; 
   margin: 20px 20px;
 }
